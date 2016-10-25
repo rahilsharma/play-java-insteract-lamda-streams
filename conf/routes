@@ -15,3 +15,4 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET /getAllData                    controllers.LamdaStreamExampleController.getAllData
 GET /getAllSortedData/:order       controllers.LamdaStreamExampleController.getAllSortedData(order)
 GET /getSingleObjectData/:objectId controllers.LamdaStreamExampleController.getSingleObjectData(objectId)
+GET /searchUsingCompanyId/:searchString controllers.LamdaStreamExampleController.searchUsingCompanyId(searchString)

@@ -36,20 +36,6 @@ public class LamdaStreamExampleController extends Controller {
 	      	  return ok(objectNode);
 	    	}
 	    }
-     public static List<Insteract> readData() {
-    	 try{
-    	InputStream is = new FileInputStream("C://test1.txt");
-     	ObjectMapper mapper = new ObjectMapper();
-     	List<Insteract> insteract = mapper.readValue(is, new TypeReference<List<Insteract>>(){});
-     	return insteract;
-    	 }
-    	 catch(Exception t){
-    		 Logger.info("For now just log it");
-    		 Logger.info(t.getMessage());
-    		 return new ArrayList<Insteract>();
-    	 }
-     	
-     }
      public Result getAllSortedData(String order) {
     	 ObjectMapper mapper = new ObjectMapper();
 	    	try
@@ -77,28 +63,8 @@ public class LamdaStreamExampleController extends Controller {
 	      	  return ok(objectNode);
 	    	}
 	    }
-     public static ObjectNode returnErrorMessage(String type,int code,String message){
-     	ObjectMapper mapper = new ObjectMapper();
-   	  	ObjectNode objectNode = mapper.createObjectNode();
-         objectNode.put("Type", type);
-         objectNode.put("Code",code);
-         objectNode.put("Message",message);
-         return objectNode;
-     }
-     public static int getOrderFlag(String order){
-    	 if (order.equals("ASC")){
-    		 return 1;
-    	 }
-    	 else if (order.equals("DESC")){
-    		 return -1;
-    	 }
-    	 else{
-    		 return 2;
-    	 }
-     }
-      
      public Result getSingleObjectData(String objectId) {
-    	 	ObjectMapper mapper = new ObjectMapper();
+ 	 	ObjectMapper mapper = new ObjectMapper();
 	    	try{
 	    	if (objectId == null) {
 	    		return ok(returnErrorMessage("Error",0,"ObjectId not provided!!!"));
@@ -114,11 +80,74 @@ public class LamdaStreamExampleController extends Controller {
 	      	  return ok(returnErrorMessage("Error",0,"Reason Unknown"));
 	    	}
 	    }
-     public static boolean areTheyEqual(String id,String objectId){
+     public Result searchUsingCompanyId(String searchString) {
+  	 	ObjectMapper mapper = new ObjectMapper();
+ 	    	try{
+ 	    	if (searchString == null) {
+ 	    		return ok(returnErrorMessage("Error",0,"SearchString not provided!!!"));
+ 	    	}
+ 	    	List<Insteract> searchObjects = readData().stream()
+ 	    	                              .filter(s -> searchCompanyId(s.getCompanyId(),searchString))
+ 	    	                              .sorted(byDateAsc)
+ 	    	                              .collect(Collectors.toList());
+ 	    	return ok(mapper.convertValue(searchObjects, JsonNode.class));
+ 	    	}
+ 	    	catch (Throwable t) {
+ 	    	  Logger.error("Exception with getSingleObjectData", t);
+ 	      	  return ok(returnErrorMessage("Error",0,"Reason Unknown"));
+ 	    	}
+ 	    }
+     
+     
+     
+      
+      
+     
+     
+     
+     public static ObjectNode returnErrorMessage(String type,int code,String message){
+     	ObjectMapper mapper = new ObjectMapper();
+   	  	ObjectNode objectNode = mapper.createObjectNode();
+        objectNode.put("Type", type);
+        objectNode.put("Code",code);
+        objectNode.put("Message",message);
+        return objectNode;
+     }
+     public static int getOrderFlag(String order){
+    	 if (order.equals("ASC")){
+    		 return 1;
+    	 }
+    	 else if (order.equals("DESC")){
+    		 return -1;
+    	 }
+    	 else{
+    		 return 2;
+    	 }
+     }
+      
+    public static boolean areTheyEqual(String id,String objectId){
     	 return id.equals(objectId);
        }  
+    public static boolean searchCompanyId(String companyId,String searchString){
+    	return companyId.contains(searchString);
+    }
      Comparator<Insteract> byDateAsc = (e1, e2) -> Long.compare(
              e1.getTime(), e2.getTime());
      Comparator<Insteract> byDateDesc = (e1, e2) -> Long.compare(
              e2.getTime(), e1.getTime());
+     public static List<Insteract> readData() {
+    	 try{
+    	InputStream is = new FileInputStream("C://test1.txt");
+     	ObjectMapper mapper = new ObjectMapper();
+     	List<Insteract> insteract = mapper.readValue(is, new TypeReference<List<Insteract>>(){});
+     	return insteract;
+    	 }
+    	 catch(Exception t){
+    		 Logger.info("For now just log it");
+    		 Logger.info(t.getMessage());
+    		 return new ArrayList<Insteract>();
+    	 }
+     	
+     }
+     
 }
