@@ -36,7 +36,12 @@ public class LamdaStreamExampleController extends Controller {
 	      	  return ok(objectNode);
 	    	}
 	    }
-     public Result getAllSortedData(String order) {
+     /*
+      * returns complete list of data based on order flag
+      * possible order values --->> ASC,DESC 
+      * .stream().sorted(byDateAsc).collect(Collectors.toList())
+	 */
+	 public Result getAllSortedData(String order) {
     	 ObjectMapper mapper = new ObjectMapper();
 	    	try
 	    	{
@@ -63,7 +68,12 @@ public class LamdaStreamExampleController extends Controller {
 	      	  return ok(objectNode);
 	    	}
 	    }
-     public Result getSingleObjectData(String objectId) {
+	 /*
+      * returns singleObject 
+      * input objectId of object queried
+      * .stream().filter(s -> areTheyEqual(s.getId(),objectId)).findFirst().get()
+	 */
+	 public Result getSingleObjectData(String objectId) {
  	 	ObjectMapper mapper = new ObjectMapper();
 	    	try{
 	    	if (objectId == null) {
@@ -80,7 +90,13 @@ public class LamdaStreamExampleController extends Controller {
 	      	  return ok(returnErrorMessage("Error",0,"Reason Unknown"));
 	    	}
 	    }
-     public Result searchUsingCompanyId(String searchString) {
+	 /*
+	  * Basic search example 
+      * returns list of objects which match search criteria on companyId 
+      * input searchString
+      * .stream().filter(s -> searchCompanyId(s.getCompanyId(),searchString)).sorted(byDateAsc).collect(Collectors.toList())
+	 */
+	 public Result searchUsingCompanyId(String searchString) {
   	 	ObjectMapper mapper = new ObjectMapper();
  	    	try{
  	    	if (searchString == null) {
@@ -97,7 +113,13 @@ public class LamdaStreamExampleController extends Controller {
  	      	  return ok(returnErrorMessage("Error",0,"Reason Unknown"));
  	    	}
  	    }
-     public Result getDataBetweenTimestamps(Long startTime,Long stopTime) {
+	 /*
+	  * Get list of objects between two timestamps (Date timestamps)
+      * returns list of objects which match  criteria 
+      * input startTimestamp and stopTimestamp
+      * .stream().filter(s -> betweenTimestamps(startTime,stopTime,s.getTime())).sorted(byDateAsc).collect(Collectors.toList())
+	 */
+	 public Result getDataBetweenTimestamps(Long startTime,Long stopTime) {
    	 	ObjectMapper mapper = new ObjectMapper();
   	    	try{
   	    	if (startTime == null || stopTime == null) {
@@ -114,6 +136,12 @@ public class LamdaStreamExampleController extends Controller {
   	      	  return ok(returnErrorMessage("Error",0,"Reason Unknown"));
   	    	}
   	    }
+	 /*
+	  * Get list of objects based on order , lastTimestamp of element , pageSize
+      * returns list of objects which match criteria 
+      * input order --> ASC,DESC and lastTimestamp and pageSize  
+      * .stream().filter(s -> afterTimestamp(lastTimestamp,s.getTime())).sorted(byDateAsc)..limit(pageSize).collect(Collectors.toList())
+	 */
      //need to pass id not timestamp as there can be more than one elements on a timestamp
      public Result getAllSortedDataPaging(String order,Long lastTimestamp,int pageSize) {
     	 ObjectMapper mapper = new ObjectMapper();
@@ -155,6 +183,11 @@ public class LamdaStreamExampleController extends Controller {
         objectNode.put("Message",message);
         return objectNode;
      }
+     /*
+	  *return orderFlag 
+	  *input order
+	 */
+
      public static int getOrderFlag(String order){
     	 if (order.equals("ASC")){
     		 return 1;
@@ -167,9 +200,17 @@ public class LamdaStreamExampleController extends Controller {
     	 }
      }
       
+     /*
+	  *Check two strings equal
+	 */
+
     public static boolean areTheyEqual(String id,String objectId){
     	 return id.equals(objectId);
        }  
+    /*
+	  *Check if companyId contains searchStirng
+	 */
+    
     public static boolean searchCompanyId(String companyId,String searchString){
     	return companyId.contains(searchString);
     }
