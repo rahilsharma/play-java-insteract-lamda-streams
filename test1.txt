@@ -1,0 +1,142 @@
+[
+  {
+    "_id": "111111111111111111111111",
+    "data": {
+      "list": {
+        "item": {
+          "aairport": "Chennai Intl, Chennai, India (MAA)",
+          "acode": "MAA",
+          "dairport": "Kansas City Intl, Kansas City, United States (MCI)",
+          "dcode": "MCI",
+          "tripType": "O",
+          "dDate": "2016-10-30",
+          "travelDays": 1,
+          "suggested": [
+            47725,
+            57066,
+            85432,
+            47255
+          ]
+        },
+        "selected": 4
+      }
+    },
+    "recordRef": "X1110131510",
+    "companyId": "e1a332c8857a709cd654404f",
+    "created": "2016-10-19T18:13:00.000Z",
+    "modified": "2016-10-14T18:13:00.000Z",
+    "active": true
+  },
+  {
+    "_id": "111111111111111111111112",
+    "data": {
+      "list": {
+        "item": {
+          "aairport": "Chennai Intl, Chennai, India (MAA)",
+          "acode": "MAA",
+          "dairport": "Kansas City Intl, Kansas City, United States (MCI)",
+          "dcode": "MCI",
+          "tripType": "O",
+          "dDate": "2016-10-30",
+          "travelDays": 1,
+          "suggested": [
+            47725,
+            57066,
+            85432,
+            47255
+          ]
+        },
+        "selected": 4
+      }
+    },
+    "recordRef": "X1110131510",
+    "companyId": "e1a332c8857a709cd654404f",
+    "created": "2016-10-12T18:13:00.000Z",
+    "modified": "2016-10-14T18:13:00.000Z",
+    "active": true
+  },
+  {
+    "_id": "111111111111111111111113",
+    "data": {
+      "list": {
+        "item": {
+          "aairport": "Chennai Intl, Chennai, India (MAA)",
+          "acode": "MAA",
+          "dairport": "Kansas City Intl, Kansas City, United States (MCI)",
+          "dcode": "MCI",
+          "tripType": "O",
+          "dDate": "2016-10-30",
+          "travelDays": 1,
+          "suggested": [
+            47725,
+            57066,
+            85432,
+            47255
+          ]
+        },
+        "selected": 4
+      }
+    },
+    "recordRef": "X1110131510",
+    "companyId": "e1a332c8857a709cd6544ccc",
+    "created": "2016-10-14T18:13:00.000Z",
+    "modified": "2016-10-14T18:13:00.000Z",
+    "active": true
+  },
+  {
+    "_id": "111111111111111111111114",
+    "data": {
+      "list": {
+        "item": {
+          "aairport": "Chennai Intl, Chennai, India (MAA)",
+          "acode": "MAA",
+          "dairport": "Kansas City Intl, Kansas City, United States (MCI)",
+          "dcode": "MCI",
+          "tripType": "O",
+          "dDate": "2016-10-30",
+          "travelDays": 1,
+          "suggested": [
+            47725,
+            57066,
+            85432,
+            47255
+          ]
+        },
+        "selected": 4
+      }
+    },
+    "recordRef": "X1110131510",
+    "companyId": "e1a332c8857a709cd6544bbb",
+    "created": "2016-10-17T18:13:00.000Z",
+    "modified": "2016-10-14T18:13:00.000Z",
+    "active": true
+  },
+  {
+    "_id": "111111111111111111111115",
+    "data": {
+      "list": {
+        "item": {
+          "aairport": "Chennai Intl, Chennai, India (MAA)",
+          "acode": "MAA",
+          "dairport": "Kansas City Intl, Kansas City, United States (MCI)",
+          "dcode": "MCI",
+          "tripType": "O",
+          "dDate": "2016-10-30",
+          "travelDays": 1,
+          "suggested": [
+            47725,
+            57066,
+            85432,
+            47255
+          ]
+        },
+        "selected": 4
+      }
+    },
+    "recordRef": "X1110131510",
+    "companyId": "e1a332c8857a709cd6544aaa",
+    "created": "2016-10-14T18:13:00.000Z",
+    "modified": "2016-10-14T18:13:00.000Z",
+    "active": true
+  }
+]
