@@ -16,3 +16,5 @@ GET /getAllData                    controllers.LamdaStreamExampleController.getA
 GET /getAllSortedData/:order       controllers.LamdaStreamExampleController.getAllSortedData(order)
 GET /getSingleObjectData/:objectId controllers.LamdaStreamExampleController.getSingleObjectData(objectId)
 GET /searchUsingCompanyId/:searchString controllers.LamdaStreamExampleController.searchUsingCompanyId(searchString)
+GET /getDataBetweenTimestamps/:startTime/:stopTime 				controllers.LamdaStreamExampleController.getDataBetweenTimestamps(startTime: Long,stopTime: Long)
+GET /getAllSortedDataPaging/:order/:lastTimestamp/:pageSize          controllers.LamdaStreamExampleController.getAllSortedDataPaging(order: String,lastTimestamp: Long,pageSize: Integer)

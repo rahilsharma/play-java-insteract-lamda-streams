@@ -97,13 +97,55 @@ public class LamdaStreamExampleController extends Controller {
  	      	  return ok(returnErrorMessage("Error",0,"Reason Unknown"));
  	    	}
  	    }
-     
-     
-     
-      
-      
-     
-     
+     public Result getDataBetweenTimestamps(Long startTime,Long stopTime) {
+   	 	ObjectMapper mapper = new ObjectMapper();
+  	    	try{
+  	    	if (startTime == null || stopTime == null) {
+  	    		return ok(returnErrorMessage("Error",0,"Start,Stop not provided!!!"));
+  	    	}
+  	    	List<Insteract> timestampObjects = readData().stream()
+  	    	                              .filter(s -> betweenTimestamps(startTime,stopTime,s.getTime()))
+  	    	                              .sorted(byDateAsc)
+  	    	                              .collect(Collectors.toList());
+  	    	return ok(mapper.convertValue(timestampObjects, JsonNode.class));
+  	    	}
+  	    	catch (Throwable t) {
+  	    	  Logger.error("Exception with getSingleObjectData", t);
+  	      	  return ok(returnErrorMessage("Error",0,"Reason Unknown"));
+  	    	}
+  	    }
+     //need to pass id not timestamp as there can be more than one elements on a timestamp
+     public Result getAllSortedDataPaging(String order,Long lastTimestamp,int pageSize) {
+    	 ObjectMapper mapper = new ObjectMapper();
+	    	try
+	    	{
+	    	int orderFlag = getOrderFlag(order);
+	    	if (orderFlag == 1){
+	    	List<Insteract> insteract = readData().stream()
+	    	                                      .filter(s -> afterTimestamp(lastTimestamp,s.getTime()))
+	    	                                      .sorted(byDateAsc)
+	    	                                      .limit(pageSize)
+	    	                                      .collect(Collectors.toList());    	
+	    	return ok(mapper.convertValue(insteract, JsonNode.class));
+	    	}
+	    	else if (orderFlag == -1){
+	    		List<Insteract> insteract = readData().stream()
+	    	    .filter(s -> afterTimestamp(lastTimestamp,s.getTime()))
+                .sorted(byDateDesc)
+                .limit(pageSize)
+                .collect(Collectors.toList());    	
+	    	return ok(mapper.convertValue(insteract, JsonNode.class));
+	    	}
+	    	else {
+		   	return ok(returnErrorMessage("Error",0,"No order defined ASC OR DESC"));
+		   }
+	    	}
+	    	catch (Throwable t) {
+	    	  Logger.error("Exception with getAllData", t);
+	    	  ObjectNode objectNode = returnErrorMessage("Error",0,"Reason Unknown");
+	      	  return ok(objectNode);
+	    	}
+	    }
      
      public static ObjectNode returnErrorMessage(String type,int code,String message){
      	ObjectMapper mapper = new ObjectMapper();
@@ -130,6 +172,25 @@ public class LamdaStreamExampleController extends Controller {
        }  
     public static boolean searchCompanyId(String companyId,String searchString){
     	return companyId.contains(searchString);
+    }
+    public static boolean afterTimestamp(Long passedTimestamp,Long currentTimestamp){
+    	if (currentTimestamp > passedTimestamp){
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    public static boolean betweenTimestamps(Long startTime,Long stopTime,Long currentTimestamp){
+    	Logger.info(currentTimestamp + " :: currentTimestamp");
+    	Logger.info(startTime + " :: startTime");
+    	Logger.info(stopTime + " :: stopTime");
+    	if ((currentTimestamp >= startTime) && (currentTimestamp <= stopTime)){
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
      Comparator<Insteract> byDateAsc = (e1, e2) -> Long.compare(
              e1.getTime(), e2.getTime());
