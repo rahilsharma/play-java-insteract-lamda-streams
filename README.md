@@ -44,7 +44,9 @@ GET /getDataBetweenTimestamps/:startTime/:stopTime 				controllers.LamdaStreamEx
       * returns list of objects which match criteria 
       * input order --> ASC,DESC and lastTimestamp and pageSize  
       * .stream().filter(s -> afterTimestamp(lastTimestamp,s.getTime())).sorted(byDateAsc)..limit(pageSize).collect(Collectors.toList())
-
+ 
 *************************************************************************
-
+************************************************
+*NOTE : FOR FIRST CALL PASS lastTimestamp as 0.
+**************************************************
 GET /getAllSortedDataPaging/:order/:lastTimestamp/:pageSize          controllers.LamdaStreamExampleController.getAllSortedDataPaging(order: String,lastTimestamp: Long,pageSize: Integer)
